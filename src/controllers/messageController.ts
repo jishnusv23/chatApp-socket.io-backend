@@ -6,9 +6,9 @@ const Messagecontroller = {
     try {
         console.log("kfkfjdkfdjkfjd")
         const{chatId}=req.params
-        console.log("🚀 ~ file: messageController.ts:9 ~ GetAllMsg: ~ chatId:", chatId)
+        // console.log("🚀 ~ file: messageController.ts:9 ~ GetAllMsg: ~ chatId:", chatId)
         const allMsg=await MsgModel.find({chatId:chatId})
-        console.log("🚀 ~ file: messageController.ts:9 ~ GetAllMsg: ~ allMsg:", allMsg)
+        // console.log("🚀 ~ file: messageController.ts:9 ~ GetAllMsg: ~ allMsg:", allMsg)
         res.json({ success: true, messages: allMsg });
     } catch (err) {
       next(err);
@@ -19,8 +19,8 @@ const Messagecontroller = {
     try {
       console.log(req.body);
       const { senderId, chatId, message } = req.body;
-      console.log("🚀 ~ file: messageController.ts:22 ~ AddMsg: ~ message:", message)
-      console.log("🚀 ~ file: messageController.ts:22 ~ AddMsg: ~ chatId:", chatId)
+      // console.log("🚀 ~ file: messageController.ts:22 ~ AddMsg: ~ message:", message)
+      // console.log("🚀 ~ file: messageController.ts:22 ~ AddMsg: ~ chatId:", chatId)
       await new MsgModel({
         chatId: req.body.chatId,
         senderId: senderId,

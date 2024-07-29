@@ -35,10 +35,12 @@ export const ChatController = (io: Server) => {
         }
         io.emit("getOnlineUsers", onlineUsersList);
       });
+
       socket.on("send-messsage", (data: any) => {
         const user = onlineUsersList.find(
           (user) => user.userId === data.reciverId
         );
+        console.log("🚀 ~ file: ChatController.ts:43 ~ socket.on ~ user:", user)
 
         const uuid = uuidv4();
 
@@ -51,10 +53,14 @@ export const ChatController = (io: Server) => {
           updatedAt: Date.now(),
           date: Date.now(),
         };
+        console.log(
+          "🚀 ~ file: ChatController.ts:54 ~ socket.on ~ reciverData1:",
+          reciverData
+        );
 
         if (user) {
-          console.log("first");
-          io.to(user.socketId).emit("get-message", data);
+          console.log("0-----------------------------------------------");
+          io.to(user.socketId).emit("get-message", reciverData);
         }
       });
       socket.on("typing", (data: any) => {
