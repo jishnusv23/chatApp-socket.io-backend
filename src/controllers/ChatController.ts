@@ -53,10 +53,10 @@ export const ChatController = (io: Server) => {
           updatedAt: Date.now(),
           date: Date.now(),
         };
-        console.log(
-          "🚀 ~ file: ChatController.ts:54 ~ socket.on ~ reciverData1:",
-          reciverData
-        );
+        // console.log(
+        //   "🚀 ~ file: ChatController.ts:54 ~ socket.on ~ reciverData1:",
+        //   reciverData
+        // );
 
         if (user) {
           console.log("0-----------------------------------------------");

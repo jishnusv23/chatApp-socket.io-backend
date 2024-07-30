@@ -35,9 +35,11 @@ const controller = {
           httpOnly: true,
           maxAge: 100 * 60 * 60 * 24,
         });
-        res
-          .status(200)
-          .json({ success: true, message: "Successfully login", data:userExists });
+        res.status(200).json({
+          success: true,
+          message: "Successfully login",
+          data: userExists,
+        });
       }
     } catch (error) {
       console.error("Something wrong", error);
@@ -91,8 +93,8 @@ const controller = {
   GetAllUser: async (req: Request, res: Response) => {
     try {
       console.log(req.params.id);
-      const RestOfthem=await Users.find({_id:{$ne:req.params.id}})
-      res.json({success:true,data:RestOfthem})
+      const RestOfthem = await Users.find({ _id: { $ne: req.params.id } });
+      res.json({ success: true, data: RestOfthem });
     } catch (err) {
       console.error(err);
     }
@@ -101,7 +103,7 @@ const controller = {
     try {
       console.log(req.params);
       const { email } = req.params;
-      const currentUser = await Users.findOne({ email: email })
+      const currentUser = await Users.findOne({ email: email });
       if (currentUser) {
         res.status(201).json({ success: true, data: currentUser });
       } else {
@@ -113,19 +115,32 @@ const controller = {
     try {
       console.log(req.params);
       console.log(req.body);
-    await Users.updateOne(
-      { email: req.params.email },
-      { $set: { isAvatarImageset: true, avatarImage: req.body.image } }
-    );
-      const after=await Users.findOne({email:req.params.email})
-      if(!after){
-        res.json({isSet:false})
-      }else{
-
-        res.json({success:true,data:after})
+      await Users.updateOne(
+        { email: req.params.email },
+        { $set: { isAvatarImageset: true, avatarImage: req.body.image } }
+      );
+      const after = await Users.findOne({ email: req.params.email });
+      if (!after) {
+        res.json({ isSet: false });
+      } else {
+        res.json({ success: true, data: after });
       }
     } catch (err) {
       console.log(err);
+    }
+  },
+  Logout: async (req: Request, res: Response) => {
+    try {
+      // console.log(req.body, "kkkookokoko");
+      res.clearCookie("token").send({ message: "user logout" });
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.log(err.message);
+      } else {
+        console.log(
+          "unknow in error in the logout functionality-usercontroler"
+        );
+      }
     }
   },
 };

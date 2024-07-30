@@ -10,4 +10,6 @@ router.route("/getuser/:email").post(userController.GetCurrentUser);
 router.route('/getalluser/:id').get(userController.GetAllUser)
 router.route("/setAvatar/:email").post(userController.setAvatar)
 
+router.route('/logout').get(userController.Logout)
+
 export default router;
